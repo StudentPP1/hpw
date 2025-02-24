@@ -3,7 +3,7 @@
 const contract = (f, ...types) => {
     const checker = (...args) => {
         const typesLength = types.length;
-
+        
         for (let i = 0; i < typesLength - 1; i++) {
             const type = types[i].name.toLowerCase();
             const arg = args[i];
