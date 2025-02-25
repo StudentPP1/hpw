@@ -1,6 +1,6 @@
 import chalk from "chalk";
 
-export function iteratorFunction(iterable, timeout) {
+export function iterate(iterable, timeout) {
   const iterator = iterable[Symbol.iterator]();
   const colors = {
     red: chalk.red,
@@ -10,11 +10,14 @@ export function iteratorFunction(iterable, timeout) {
   let counter = 0;
   let sum = 0;
 
-  return {
-    next: () => {
-      const start = Date.now();
-      while (Date.now() - start < timeout * 1000) {}
-      
+  const sleep = (sec) => new Promise((resolve) => {
+      setTimeout(resolve, sec * 1000);
+  });
+
+  const next = async () => {
+    while (true) {
+      await sleep(timeout);
+
       const result = iterator.next().value;
       if (typeof result === "number") {
         counter++;
@@ -30,6 +33,8 @@ export function iteratorFunction(iterable, timeout) {
       } else {
         console.log(result);
       }
-    },
+    }
   };
+
+  next();
 }

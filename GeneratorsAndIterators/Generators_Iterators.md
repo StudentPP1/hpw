@@ -142,12 +142,9 @@ Processing tasks:
 
 ### Example 1:
 ```sh
-import { iteratorFunction } from "./iterators/iteratorFunction.js";
+import { iterate } from "./iterators/iteratorFunction.js";
 import { incrementGenerator } from "./generators/incrementGenerator.js";
-const iterate = iteratorFunction(incrementGenerator(0), 1);
-iterate.next();
-iterate.next();
-iterate.next();
+iterate(incrementGenerator(0), 1);
 ```
 Output:
 ```
